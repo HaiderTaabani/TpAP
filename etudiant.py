@@ -1,5 +1,5 @@
 # tp_etudiants.py
-# Commit 2 : ajout de la méthode rank_matter_1
+# Commit initial : déclaration des classes Etudiant et Classe
 
 class Etudiant:
     """
@@ -24,9 +24,11 @@ class Classe:
         self.etudiants = []
 
     def ajouter_etudiant(self, etudiant):
+        """
+        Ajouter un étudiant à la classe.
+        """
         self.etudiants.append(etudiant)
 
-    # Méthodes déjà existantes
     def trier_par_matiere1(self):
         return sorted(self.etudiants, key=lambda e: e.matiere1, reverse=True)
 
@@ -39,22 +41,15 @@ class Classe:
     def trier_par_moyenne(self):
         return sorted(self.etudiants, key=lambda e: e.moyenne, reverse=True)
 
-    # --- Nouvelle méthode pour le 2ème commit ---
-    def rank_matter_1(self):
-        """
-        Affiche les étudiants triés par matière 1 (ordre décroissant).
-        """
-        print("\n--- Classement par matière 1 ---")
-        for e in self.trier_par_matiere1():
-            print(f"{e.nom}: {e.matiere1}")
 
-
-# --- Bloc main ---
+# --- Test facultatif ---
 if __name__ == "__main__":
     c = Classe()
     c.ajouter_etudiant(Etudiant("Ali", 14, 12, 16))
     c.ajouter_etudiant(Etudiant("Sara", 18, 15, 17))
     c.ajouter_etudiant(Etudiant("Yacine", 10, 11, 9))
 
-    # Appel de la méthode rank_matter_1
-    c.rank_matter_1()
+    print("Tri par matière 1 :", c.trier_par_matiere1())
+    print("Tri par matière 2 :", c.trier_par_matiere2())
+    print("Tri par matière 3 :", c.trier_par_matiere3())
+    print("Tri par moyenne :", c.trier_par_moyenne())
