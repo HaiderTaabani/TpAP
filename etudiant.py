@@ -1,5 +1,5 @@
 # tp_etudiants.py
-# Commit 3 : SchoolClass devient Iterable avec itérateur pour matière 1
+# Commit : ajout des itérateurs pour matières 2 et 3
 
 from collections.abc import Iterable, Iterator
 
@@ -20,7 +20,7 @@ class Student:
 
 class SchoolClass(Iterable):
     """
-    Classe représentant une classe d'étudiants et iterable pour matière 1.
+    Classe représentant une classe d'étudiants et iterable pour les matières.
     """
     def __init__(self):
         self.students = []
@@ -28,13 +28,10 @@ class SchoolClass(Iterable):
     def add_student(self, student):
         self.students.append(student)
 
-    def trier_par_matiere1(self):
-        return sorted(self.students, key=lambda e: e.matiere1, reverse=True)
-
-    # --- Méthodes rank ---
+    # Méthodes rank
     def rank_matter_1(self):
         print("\n--- Classement par matière 1 ---")
-        for e in self.trier_par_matiere1():
+        for e in sorted(self.students, key=lambda e: e.matiere1, reverse=True):
             print(f"{e.nom}: {e.matiere1}")
 
     def rank_matter_2(self):
@@ -47,12 +44,24 @@ class SchoolClass(Iterable):
         for e in sorted(self.students, key=lambda e: e.matiere3, reverse=True):
             print(f"{e.nom}: {e.matiere3}")
 
-    # --- Méthode pour Iterable ---
+    # --- Itérateurs pour les matières ---
     def __iter__(self):
         """
-        Renvoie un itérateur qui parcourt les étudiants du meilleur au pire en matière 1.
+        Itérateur pour parcourir les étudiants du meilleur au pire en matière 1
         """
-        return iter(self.trier_par_matiere1())
+        return iter(sorted(self.students, key=lambda e: e.matiere1, reverse=True))
+
+    def iter_matter_2(self):
+        """
+        Itérateur pour parcourir les étudiants du meilleur au pire en matière 2
+        """
+        return iter(sorted(self.students, key=lambda e: e.matiere2, reverse=True))
+
+    def iter_matter_3(self):
+        """
+        Itérateur pour parcourir les étudiants du meilleur au pire en matière 3
+        """
+        return iter(sorted(self.students, key=lambda e: e.matiere3, reverse=True))
 
 
 # --- Bloc main ---
@@ -67,7 +76,15 @@ if __name__ == "__main__":
     school_class.rank_matter_2()
     school_class.rank_matter_3()
 
-    # --- Test de l'itérable ---
-    print("\n--- Parcours des étudiants avec __iter__ (matière 1) ---")
+    # --- Test des itérateurs ---
+    print("\n--- Itérateur matière 1 ---")
     for student in school_class:
         print(f"{student.nom}: {student.matiere1}")
+
+    print("\n--- Itérateur matière 2 ---")
+    for student in school_class.iter_matter_2():
+        print(f"{student.nom}: {student.matiere2}")
+
+    print("\n--- Itérateur matière 3 ---")
+    for student in school_class.iter_matter_3():
+        print(f"{student.nom}: {student.matiere3}")
