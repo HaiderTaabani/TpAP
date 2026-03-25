@@ -1,7 +1,7 @@
 # tp_etudiants.py
-# Commit initial : déclaration des classes Etudiant et Classe
+# Commit : ajout des méthodes rank_matter_2 et rank_matter_3
 
-class Etudiant:
+class Student:
     """
     Classe représentant un étudiant avec 3 notes et une moyenne.
     """
@@ -16,40 +16,54 @@ class Etudiant:
         return f"{self.nom}: M1={self.matiere1}, M2={self.matiere2}, M3={self.matiere3}, Moyenne={self.moyenne:.2f}"
 
 
-class Classe:
+class SchoolClass:
     """
     Classe représentant une classe d'étudiants.
     """
     def __init__(self):
-        self.etudiants = []
+        self.students = []
 
-    def ajouter_etudiant(self, etudiant):
-        """
-        Ajouter un étudiant à la classe.
-        """
-        self.etudiants.append(etudiant)
+    def add_student(self, student):
+        self.students.append(student)
 
+    # Méthodes de tri
     def trier_par_matiere1(self):
-        return sorted(self.etudiants, key=lambda e: e.matiere1, reverse=True)
+        return sorted(self.students, key=lambda e: e.matiere1, reverse=True)
 
     def trier_par_matiere2(self):
-        return sorted(self.etudiants, key=lambda e: e.matiere2, reverse=True)
+        return sorted(self.students, key=lambda e: e.matiere2, reverse=True)
 
     def trier_par_matiere3(self):
-        return sorted(self.etudiants, key=lambda e: e.matiere3, reverse=True)
+        return sorted(self.students, key=lambda e: e.matiere3, reverse=True)
 
     def trier_par_moyenne(self):
-        return sorted(self.etudiants, key=lambda e: e.moyenne, reverse=True)
+        return sorted(self.students, key=lambda e: e.moyenne, reverse=True)
+
+    # --- Méthodes rank pour chaque matière ---
+    def rank_matter_1(self):
+        print("\n--- Classement par matière 1 ---")
+        for e in self.trier_par_matiere1():
+            print(f"{e.nom}: {e.matiere1}")
+
+    def rank_matter_2(self):
+        print("\n--- Classement par matière 2 ---")
+        for e in self.trier_par_matiere2():
+            print(f"{e.nom}: {e.matiere2}")
+
+    def rank_matter_3(self):
+        print("\n--- Classement par matière 3 ---")
+        for e in self.trier_par_matiere3():
+            print(f"{e.nom}: {e.matiere3}")
 
 
-# --- Test facultatif ---
+# --- Bloc main ---
 if __name__ == "__main__":
-    c = Classe()
-    c.ajouter_etudiant(Etudiant("Ali", 14, 12, 16))
-    c.ajouter_etudiant(Etudiant("Sara", 18, 15, 17))
-    c.ajouter_etudiant(Etudiant("Yacine", 10, 11, 9))
+    school_class = SchoolClass()
+    school_class.add_student(Student('Ali', 14, 12, 16))
+    school_class.add_student(Student('Sara', 18, 15, 17))
+    school_class.add_student(Student('Yacine', 10, 11, 9))
 
-    print("Tri par matière 1 :", c.trier_par_matiere1())
-    print("Tri par matière 2 :", c.trier_par_matiere2())
-    print("Tri par matière 3 :", c.trier_par_matiere3())
-    print("Tri par moyenne :", c.trier_par_moyenne())
+    # Appels des méthodes rank
+    school_class.rank_matter_1()
+    school_class.rank_matter_2()
+    school_class.rank_matter_3()
